@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<main class="p-5 align-content-center bg-blur my-register-div my-main">
+    <h1 class="text-light    border-bottom mb-5">Login</h1>
+    <div class="d-flex justify-content-center">
+        <div class="row justify-content-md-center">
+            <img alt="Login image" src="/images/login2.jpg" class="w-50 rounded">
+        </div>
+        <div class="row g-3 align-items-center">
+            <form th:action="@{/users/login}"
+                  th:method="POST">
+                <div>
+                    <div class="col-auto">
+                        <label for="inputUsername" class="col-form-label text-light">Username</label>
+                    </div>
+                    <div class="col-auto">
+                        <input th:value="${username}" type="text" name="username" id="inputUsername" class="form-control"
+                               aria-describedby="usernameHelpInline">
+                    </div>
+                </div>
+                <div>
+                    <div class="col-auto">
+                        <label for="inputPassword" class="col-form-label text-light">Password</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               aria-describedby="passwordHelpInline">
+                    </div>
+                </div>
+                <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                    Invalid username or password.
+                </p>
+                <div class="d-flex justify-content-center mt-2">
+                    <button class="btn btn-info btn-block w-50" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

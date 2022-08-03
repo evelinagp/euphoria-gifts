@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+
+    <header th:replace="fragments/commons::navigation"></header>
+    <main class="p-5 align-content-center bg-blur my-register-div my-main">
+        <div class="col d-flex justify-content-center">
+            <div class="col-sm-3 sidebar-container ">
+                <div class="wrapper ">
+                    <!-- Sidebar  -->
+                    <nav id="sidebar">
+                        <div class="sidebar-header text-light">
+                            <h2>Categories</h2>
+                        </div>
+                        <ul class="sidebar-list">
+                            <li>
+                                <a class="sidebar-link text-light" th:href="@{/gifts/categories/home}">HOME</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link text-light" th:href="@{/gifts/categories/kitchen}">KITCHEN</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" th:href="@{/gifts/categories/women}">WOMEN</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" th:href="@{/gifts/categories/men}">MEN</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" th:href="@{/gifts/categories/occasions}">OCCASIONS</a>
+                            </li>
+                            <li>
+                                <a class="sidebar-link" th:href="@{/gifts/categories/others}">OTHERS</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+
+                    <!--        <div class="sidebar">-->
+                    <!--            <span class="head-text text-light">Categories</span>-->
+                    <!--            <hr>-->
+                    <!--            <ul class="sidebar-list">-->
+                    <!--                <li th:each="category : ${allCategories}" th:object="${category}">-->
+                    <!--                    <a th:href="@{/gifts/category-{category} (category=${category.name})}"-->
+                    <!--                       class="sidebar-link" th:text="*{name}">-->
+                    <!--                        Dashboard-->
+                    <!--                    </a>-->
+                    <!--                    <hr>-->
+                    <!--                </li>-->
+                    <!--            </ul>-->
+                    <!--            <hr>-->
+                    <!--        </div>-->
+                </div>
+            </div>
+        </div>
+
+        <div th:each="g: ${gifts}" th:object="${g}" class="card text-light text-center" style="width: 18rem;">
+            <img class="card-img-top" th:src="*{pictureUrl}" alt="Card image cap">
+            <div class="card-body">
+                <h5 th:text="*{name}" class="card-title">Card title</h5>
+                <p th:text="*{#strings.substring(description, 0, 15 )}" class="card-text">Some quick example text to
+                    build on the card title and make up the bulk of the card's content.</p>
+                <a th:href="@{/gifts/details/{id}(id = *{id})}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+    </main>
+</div>
+<!--<div th:each="g: ${gifts}">-->
+<!--    <img th:src="${g.getUrl()}" th:alt="${p.getTitle()}"/></br>-->
+
+<!--    <form th:action="@{/gifts/delete}"-->
+<!--          th:method="DELETE">-->
+<!--        <input type="hidden" name="id" th:value="${g}"/>-->
+<!--        <input type="submit" value="Delete"/>-->
+
+<!--    </form>-->
+<!--    <br/>-->
+
+<!--</div>-->
+
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>

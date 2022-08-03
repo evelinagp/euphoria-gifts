@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<div class="wrapper">
+    <main class="p-5 align-content-center bg-blur my-register-div my-main">
+        <div class="col d-flex justify-content-center">
+            <h3 class="mySticky text-light justify-content-center rounded">Home</h3>
+        </div>
+        <div th:if="${home.size()==0}" class="container-empty">
+            <div class="content-empty">Seems like we don`t have gifts in this category yet. Don`t worry, coming soon...</div>
+        </div>
+        <div th:each="h: ${home}" th:object="${h}" class="card text-light text-center" style="width: 18rem;">
+            <img class="card-img-top" th:src="*{pictureUrl}" alt="Card image cap">
+            <div class="card-body">
+                <h5 th:text="*{name}" class="card-title">Card title</h5>
+                <p th:text="*{#strings.substring(description, 0, 15 )}" class="card-text">Some quick example text to
+                    build on the card title and make up the bulk of the card's content.</p>
+                <a th:href="@{/gifts/details/{id}(id = *{id})}" class="btn btn-primary">Learn More</a>
+            </div>
+        </div>
+        <!--            <img th:src="*{pictureUrl}" alt="Title image">-->
+
+    </main>
+</div>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
