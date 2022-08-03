@@ -110,16 +110,6 @@ public class GiftServiceImpl implements GiftService {
         return this.giftRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Gift with " + id + " doesn't exist!"));
     }
 
-//    @Override
-//    public List<GiftViewModel> getAllGiftsByCategory(String category) {
-//        List<GiftViewModel> listByCategoryName = this.giftRepository.findAllByCategory_CategoryName(category);
-//
-//        if (listByCategoryName.isEmpty()) {
-//            throw new ObjectNotFoundException("They are not any added gifts in " + category + " category yet!");
-//        }
-//        return listByCategoryName;
-//    }
-
 
     @Override
     public List<GiftViewModel> getAllGiftsByCategoryName(CategoryNameEnum homeCategory) {
@@ -141,35 +131,18 @@ public class GiftServiceImpl implements GiftService {
         return giftsByCategoryName;
     }
 
-//    @Override
-//    public GiftServiceModel mapGiftServiceModel(GiftServiceModel giftServiceModel1) {
-//        GiftServiceModel giftServiceModel = new GiftServiceModel();
-//        giftServiceModel.setName(giftServiceModel1.getName());
-//        giftServiceModel.setPrice(giftServiceModel1.getPrice());
-//        giftServiceModel.setDescription(giftServiceModel1.getDescription());
-//        giftServiceModel.setCategory(giftServiceModel1.getCategory());
-//        giftServiceModel.setPicture(giftServiceModel1.getPicture());
-//
-//        return giftServiceModel;
-//    }
-
-//    @Override
-//    public void update(GiftServiceModel giftServiceModel) {
-//        GiftEntity gift = this.modelMapper.map(giftServiceModel, GiftEntity.class);
-//        this.giftRepository.save(gift);
-//    }
 
     @Override
     public void updateGift(GiftServiceModel giftServiceModel) throws IOException {
         GiftEntity giftById = giftRepository.findById
                 (giftServiceModel.getId()).orElseThrow();
 
-//        giftById.setCategory(categoryService.findCategoryById(giftServiceModel.getCategory().getId()));
         giftById.setDescription(giftServiceModel.getDescription());
         giftById.setPrice(giftServiceModel.getPrice());
         giftById.setName(giftServiceModel.getName());
-//        giftById.setCategory(categoryService.findByCategoryNameEnum(giftServiceModel.getCategory().getCategoryName()));
-
+        giftById.setCategory(categoryService.findByCategoryNameEnum(giftServiceModel.getCategory().getCategoryName()));
+//        giftById.setCategory(categoryService.findCategoryById(giftServiceModel.getCategory().getId()));
+        
         var picture = createPictureEntity(giftServiceModel.getPicture());
         pictureRepository.saveAndFlush(picture);
 
