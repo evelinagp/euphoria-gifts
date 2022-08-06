@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<main class="p-5 align-content-center bg-blur my-main">
+    <div class="d-flex justify-content-center">
+
+        <section class="content text-center text-light h4">
+            <article class="joke">
+                <p>
+                    Thank you for your order!<br>
+                    Order number: 123456<br>
+                    Expected delivery in next 2-3 working days.
+                </p>
+                <div class="img-wrapper">
+                    <img src="/images/order-done.jpg" alt="">
+                </div>
+            </article>
+        </section>
+    </div>
+</main>
+
+<div th:replace="fragments/commons::footer"></div>
+</body>
+</html>

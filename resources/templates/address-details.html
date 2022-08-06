@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="wrapper">
+    <!-- Navigation -->
+
+    <header th:replace="fragments/commons::navigation"></header>
+    <main class="p-5 align-content-center bg-blur my-register-div my-main">
+        <div class="d-flex justify-content-center text-light" th:object="${addressBindingModel}">
+            <div class="wrapper-sections">
+                <h3 class="border-top border-bottom">Customer Address</h3>
+                <section class="section-left border-bottom">
+                    <li>
+                        <label for="city" class="form-label">City:</label>
+                        <input th:field="*{city}" th:errorclass="alert-danger" name="city" type="text"
+                               id="city"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('city')}"
+                               th:errors="*{city}"
+                               id="cityHelpInline"
+                               class="bg-danger text-light rounded">
+                            This filed should be at least 3 characters long!
+                        </small>
+                    </li>
+                    <li>
+                        <label for="postalCode" class="form-label">City postal code:</label>
+                        <input th:field="*{postalCode}" th:errorclass="alert-danger" name="postalCode"
+                               type="text"
+                               id="postalCode"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('postalCode')}"
+                               th:errors="*{postalCode}"
+                               id="postalCodeHelpInline"
+                               class="bg-danger text-light rounded">
+                            This filed should be at least 2 characters long!
+                        </small>
+                    </li>
+                    <li>
+                        <label for="street" class="form-label">Street:</label>
+                        <input th:field="*{street}" th:errorclass="alert-danger" name="street" type="text"
+                               id="street"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('street')}"
+                               th:errors="*{street}"
+                               id="streetHelpInline"
+                               class="bg-danger text-light rounded">
+                            This field should be at least 5 characters long!
+                        </small>
+                    </li>
+
+                </section>
+
+                <h3 class="border-top border-bottom">Customer Personal Info</h3>
+                <section class="section-right border-bottom">
+                    <li>
+                        <label for="firstName" class="form-label">Contact person:</label>
+                        <input th:field="*{firstName}" th:errorclass="alert-danger" type="text" id="firstName"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('firstName')}"
+                               th:errors="*{firstName}"
+                               id="firstNameHelpInline"
+                               class="bg-danger text-light rounded">
+                            This field should be at least 3 characters long!
+                        </small>
+                        <input th:field="*{lastName}" th:errorclass="alert-danger" type="text" id="lastName"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('lastName')}"
+                               th:errors="*{lastName}"
+                               id="lastNameHelpInline"
+                               class="bg-danger text-light rounded">
+                            This field should be at least 3 characters long!
+                        </small>
+                    </li>
+                    <li>
+                        <label for="email" class="form-label">Email:</label>
+                        <input th:field="*{email}" th:errorclass="alert-danger" type="email" id="email"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('email')}"
+                               th:errors="*{email}"
+                               id="emailHelpInline"
+                               class="bg-danger text-light rounded">
+                            The email is not in the valid format!
+                        </small>
+                    </li>
+                    <li>
+                        <label for="phone" class="form-label">Phone:</label>
+                        <input th:field="*{phone}" th:errorclass="alert-danger" type="text" id="phone"
+                               class="address-input rounded">
+                        <small th:if="${#fields.hasErrors('phone')}"
+                               th:errors="*{phone}"
+                               id="phoneHelpInline"
+                               class="bg-danger text-light rounded">
+                            The phone number is not in the valid format
+                        </small>
+                    </li>
+                </section>
+                <div class="d-flex justify-content-center">
+                    <form th:action="@{/orders/order-done}" th:method="POST">
+                        <button type="submit"
+                                class="btn btn-primary btn-red margin-top">
+                            Submit
+                        </button>
+                    </form>
+                    <a th:href="@{/}" class="btn btn-outline-danger btn-header btn-cancel">CANCEL</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+</div>
+</body>
+</html>

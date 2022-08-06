@@ -1,0 +1,320 @@
+.bg-nav {
+    background-color: rgba(81, 76, 76, 0.94);
+}
+
+.welcome {
+    display: inline-block;
+}
+
+.my-index-div {
+    min-height: 56.6vh;
+    max-height: 100%;
+}
+
+.my-register-div {
+    min-height: 85.5vh;
+    max-height: 100%;
+    font-family: 'Belleza', "Comic Sans MS";
+}
+
+.my-details-div {
+    min-height: 90.2vh;
+    max-height: 400%;
+}
+
+.comments, .gift-details {
+    background-color: rgba(81, 76, 76, 0.94);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.about {
+    font-family: 'Belleza', "Comic Sans MS";
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+. grid-gap: 2 rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: -webkit-linear-gradient(top, rgba(81, 1, 65, 0.38) 0%, rgba(81, 1, 65, 0.38) 26%, rgba(75, 0.5, 50, 0.30) 35%, rgba(70, 0.3, 45, 0.25) 45%, rgba(0, 0, 0, 0.42) 61%, rgba(0, 0, 0, 0.42) 100%);
+    color: white;
+    padding: 5rem;
+    margin: 50px 200px 75px 200px;
+    border-radius: 5rem;
+
+}
+
+footer {
+    position: absolute;
+    width: 100%;
+}
+
+.bg-blur {
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.42); /* Black w/opacity/see-through */
+    color: black;
+    font-weight: bold;
+    z-index: 2;
+    width: 100%;
+}
+
+body {
+    background-image: url(/images/background.jpg);
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
+}
+
+.my-main {
+    min-height: 90.2vh;
+}
+
+.dropdown-item {
+    background-color: #2e89e5;
+    color: #fff;
+    font-family: 'Belleza', "Comic Sans MS";
+
+}
+
+.dropdown-toggle, .dropdown-menu {
+    font-family: 'Belleza', "Comic Sans MS";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card {
+    font-family: 'Belleza', "Comic Sans MS";
+    text-align: center;
+    display: inline-block;
+    background: -webkit-linear-gradient(top, rgba(81, 1, 65, 0.38) 0%, rgba(81, 1, 65, 0.38) 26%, rgba(0, 0, 0, 0.42) 35%, rgba(0, 0, 0, 0.42) 45%, rgba(145, 112, 59, 0.7) 61%, rgba(213, 173, 109, 0.7) 100%);
+    position: relative;
+    margin-bottom: 5%;
+    /*padding-bottom: 3%;*/
+    transition: all 0.3s ease 0s;
+    max-width: 40%;
+    margin-left: 2%;
+    margin-right: 2%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+    background: -webkit-linear-gradient(top, rgba(81, 1, 65, 0.38) 0%, rgba(81, 1, 65, 0.38) 26%, rgba(0, 0, 0, 0.42) 35%, rgba(81, 1, 65, 0.38) 45%, rgba(81, 1, 65, 0.38) 61%, rgb(0 123 255 / 25%) 100%);
+
+}
+
+.title {
+    font-family: 'Fleur De Leah', cursive;
+
+}
+
+/*----------------------------------------SIDEBAR----------------------------------------------------*/
+
+.sidebar-container {
+    font-family: 'Belleza', sans-serif;
+    text-align: left;
+    box-shadow: 0 0 10px rgba(0, 0, 10, 0.2);
+    /*background-color: lightgrey;*/
+    background: -webkit-linear-gradient(top, rgba(81, 1, 65, 0.38) 0%, rgba(81, 1, 65, 0.38) 26%, rgba(75, 0.5, 50, 0.30) 35%, rgba(70, 0.3, 45, 0.25) 45%, rgba(0, 0, 0, 0.42) 61%, rgba(0, 0, 0, 0.42) 100%);
+
+    margin-bottom: 3%;
+    border-radius: 3rem;
+
+}
+
+.sidebar-header {
+    font-family: 'Belleza', "Comic Sans MS";
+    text-align: center;
+    display: block;
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 5%;
+}
+
+.sidebar-link {
+    font-family: 'Belleza', "Comic Sans MS";
+    font-size: 25px;
+    color: white;
+    font-weight: 400;
+}
+
+.sidebar-link:hover {
+    background: -webkit-linear-gradient(top, rgba(213, 173, 109, 1) 0%, rgba(213, 173, 109, 1) 26%, rgba(226, 186, 120, 1) 35%, rgba(163, 126, 67, 1) 45%, rgba(145, 112, 59, 1) 61%, rgba(213, 173, 109, 1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+}
+
+
+.sidebar-link:hover {
+    color: #696969;
+    text-decoration: none;
+}
+
+.sidebar-list {
+    list-style-type: none;
+    overflow: auto;
+}
+
+.sidebar-list li {
+    padding-left: 4%;
+    text-align: center;
+}
+
+.content-empty {
+    background: #ffffffd1;
+    top: 25%;
+    width: 80%;
+    position: absolute;
+    margin-left: 10%;
+    text-align: center;
+    font-size: 36px;
+    padding: 10% 3%;
+    font-family: 'Belleza', "Comic Sans MS";
+    border-radius: 5rem;
+    /*----------------------------------------------------------------------------------------------*/
+
+}
+
+/*Errors*/
+.box {
+    text-align: center;
+    text-weight: bold;
+    font-family: 'Belleza', "Comic Sans MS";
+
+}
+
+p > a {
+
+    font-style: italic;
+    text-decoration: none;
+    color: white;
+    font-size: 27px;
+}
+
+/*----------------------------------------------------------------------------------------------*/
+
+/*Location*/
+/*.header {*/
+/*    border-bottom: 1px solid #4D3127;*/
+/*}*/
+
+.middle-section {
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 100px;
+    margin-top: 100px;
+}
+
+.middle-left {
+    width: 22%;
+    font-family: Belleza, "Comic Sans MS";
+    margin-left: 0px;
+
+}
+
+.middle-right {
+    width: 75%;
+    margin-left: 0px;
+
+
+}
+
+.middle-down {
+    width: 75%;
+    margin-left: 90px;
+
+}
+
+.middle-right > img {
+    width: 95%;
+    object-fit: cover;
+
+}
+
+.middle-down > img {
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.upper-p {
+    color: #f2f2f2;
+    position: absolute;
+    top: 150px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Belleza, "Comic Sans MS";
+}
+
+.address-info > i {
+    padding-right: 5px;
+}
+
+.address-location {
+    width: 82%;
+    margin: 0 auto;
+    padding-left: 1.5%;
+}
+
+.navigation {
+    margin-right: 170px;
+}
+
+@media all and (max-width: 1214px) {
+    .message-section {
+        display: none;
+    }
+}
+
+@media all and (max-width: 1129px ) {
+    .middle-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .middle-right {
+        margin-top: 25px;
+    }
+
+    .address-location {
+        margin-bottom: 25px;
+    }
+
+    .logo-add-product {
+        color: #4D3127;
+    }
+
+    .middle-left {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .table-responsive {
+        min-width: 450px;
+    }
+
+    .order-list > th {
+        width: 60px;
+    }
+
+}
+
+
+
+
+
