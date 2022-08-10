@@ -1,15 +1,13 @@
 package com.example.euphoriagifts2.model.binding;
 
+import com.example.euphoriagifts2.annotations.ValidUrl;
 import com.example.euphoriagifts2.model.entity.enums.CategoryNameEnum;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
 public class
@@ -19,10 +17,8 @@ GiftAddBindingModel {
     private String description;
     private CategoryNameEnum category;
 
+    @ValidUrl
     private MultipartFile picture;
-
-//    @ValidUrl
-//    private MultipartFile url;
 
     public GiftAddBindingModel() {
     }
@@ -65,9 +61,7 @@ GiftAddBindingModel {
         this.description = description;
     }
 
-
-    @Valid
-    @NotNull
+    @NotNull(message = "Picture can not be empty field!")
     public MultipartFile getPicture() {
         return picture;
     }
