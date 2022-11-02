@@ -1,0 +1,40 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/euphoria_gifts_db?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
+    username: root
+    password: 1234
+
+  sql:
+    init:
+      mode: never  #first time always, after running the app change to never
+
+  jpa:
+    # Choose either MySQL 8 or MySQL 5 below
+    # For MySQL 8
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    #For MySQL 5
+    #database-platform: org.hibernate.dialect.MySQL5InnoDBDialecthow-sql=true
+    hibernate:
+      ddl-auto: create #first time create, after running the app change to validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+#Cloudinary Properties
+cloudinary:
+  api-key: 224294868543328
+  api-secret: ${CLOUDINARY_API_SECRET}
+  cloud-name: ddktqessk
+
+#      server:
+#        port: 8000
+app:
+  default:
+    admin:
+      password: admin
+
+schedulers:
+  cron: "* 00 07 1 * *"
+
