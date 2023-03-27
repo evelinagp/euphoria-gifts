@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header th:replace="fragments/commons::navigation"></header>
+<main class="p-5 bg-blur text-center my-custom-div my-main">
+<div class="d-flex justify-content-center">
+    <div class="wrapper">
+        <div class="box text-light">
+            <h1>403</h1>
+            <h3>Sorry, access to the requested resource is forbidden!</h3>
+            <img src="/images/403.jpg">
+            <p><a href="/">Please, go back this way.</a></p>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/commons :: footer"></div>
+</main>
+</body>
+</html>
