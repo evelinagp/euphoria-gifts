@@ -1,5 +1,14 @@
 # Getting Started
 
+### SETUP GUIDE
+Run the application. Connect MySQL DB through localhost:3306 and attach euphoria_gifts_db schema.
+username: root
+password: 1234
+
+Run data.sql file.
+Review the application on http://localhost:8080/
+You can login with already created from data.sql users: with password: admin
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
