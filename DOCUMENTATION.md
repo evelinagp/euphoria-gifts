@@ -2,7 +2,6 @@
 
 ### SETUP GUIDE
 Run the application.
-Add Environment variable for cloudinary: CLOUDINARY_API_SECRET=GyfXU8fyfIjE-EJiuHuuj5a7WVs
 Connect MySQL DB through localhost:3306 and attach euphoria_gifts_db schema.
 username: root
 password: 1234
