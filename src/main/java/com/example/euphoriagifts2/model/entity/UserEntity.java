@@ -91,8 +91,8 @@ public class UserEntity extends BaseEntity {
         this.roles.add(role);
         return this;
     }
-    /*@OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)*/
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,  orphanRemoval = true)/* cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE }*/
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,  orphanRemoval = true)
     public Set<CommentEntity> getComments() {
         return comments;
     }
@@ -110,6 +110,5 @@ public class UserEntity extends BaseEntity {
                 ", userRoles=" + roles +
                 '}';
     }
-
 }
 
