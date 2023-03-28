@@ -17,14 +17,12 @@ public class GiftEntity extends BaseEntity {
     private CategoryEntity category;
     private Integer quantity;
 
-    //private OrderEntity orderEntity;
-    private UserEntity userEntity;
-
+    //private Set<OrderEntity> orders;
     private PictureEntity picture;
     private Set<CommentEntity> comments;
 
     public GiftEntity() {
-      this.comments = new LinkedHashSet<>();
+        this.comments = new LinkedHashSet<>();
     }
 
     @Column(unique = true, nullable = false)
@@ -64,15 +62,6 @@ public class GiftEntity extends BaseEntity {
         this.quantity = quantity;
     }
 
-    @ManyToOne(optional = false)
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
-
     @Lob
     @Column(nullable = false)
     public String getDescription() {
@@ -83,8 +72,7 @@ public class GiftEntity extends BaseEntity {
         this.description = description;
     }
 
-    //@OneToMany()
-    @OneToMany(mappedBy = "giftEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "giftEntity", cascade = CascadeType.REMOVE,  orphanRemoval = true)
     public Set<CommentEntity> getComments() {
         return comments;
     }
@@ -101,16 +89,6 @@ public class GiftEntity extends BaseEntity {
     public void setPicture(PictureEntity picture) {
         this.picture = picture;
     }
-
-
-    //    public OrderEntity getOrderEntity() {
-//        return orderEntity;
-//    }
-//
-//    public void setOrderEntity(OrderEntity orderEntity) {
-//        this.orderEntity = orderEntity;
-//    }
-
 }
 
 
