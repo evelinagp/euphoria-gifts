@@ -48,9 +48,7 @@ public class CommentEntity extends BaseEntity {
         this.createdOn = createdOn;
     }
 
-    //@ManyToOne
-    //    @JoinColumn(name = "PARENT_ID")
-    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     public UserEntity getUser() {
         return user;
     }
@@ -59,7 +57,8 @@ public class CommentEntity extends BaseEntity {
         this.user = user;
     }
 
-    @ManyToOne(optional = false)
+    /* cascade = CascadeType.REMOVE - if we want to erase the related gift*/
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     public GiftEntity getGiftEntity() {
         return giftEntity;
     }
