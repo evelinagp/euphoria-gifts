@@ -7,12 +7,15 @@ import com.example.euphoriagifts2.model.entity.PictureEntity;
 import com.example.euphoriagifts2.model.entity.enums.CategoryNameEnum;
 import com.example.euphoriagifts2.model.service.GiftServiceModel;
 import com.example.euphoriagifts2.model.view.GiftViewModel;
+import com.example.euphoriagifts2.repository.CommentRepository;
 import com.example.euphoriagifts2.repository.GiftRepository;
 import com.example.euphoriagifts2.service.*;
 import com.example.euphoriagifts2.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -31,8 +34,9 @@ public class GiftServiceImpl implements GiftService {
     private final PictureService pictureService;
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
+    private final CommentRepository commentRepository;
 
-    public GiftServiceImpl(GiftRepository giftRepository, UserService userService, OrderService orderService, PictureService pictureService, ModelMapper modelMapper, CategoryService categoryService, CloudinaryService cloudinaryService) {
+    public GiftServiceImpl(GiftRepository giftRepository, UserService userService, OrderService orderService, PictureService pictureService, ModelMapper modelMapper, CategoryService categoryService, CloudinaryService cloudinaryService, CommentRepository commentRepository) {
         this.giftRepository = giftRepository;
         this.userService = userService;
         this.orderService = orderService;
@@ -41,35 +45,20 @@ public class GiftServiceImpl implements GiftService {
         this.categoryService = categoryService;
         this.cloudinaryService = cloudinaryService;
 
+        this.commentRepository = commentRepository;
     }
 
     @Transactional
     @Override
     public void deleteGiftById(Long id) {
         GiftEntity gift = this.giftRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Gift with id: " + id + " was not found!"));
-        deletePicturesFromCloud(gift);
-        try {
-            Set<CommentEntity> comments = new ConcurrentSkipListSet<>(gift.getComments());
-        //    Set<OrderEntity> orders = orderService.findOrdersByGift(gift);
 
-
-            //if (commentsToArray.length != 0) {
-            while (comments.size() > 0) {
-                for (CommentEntity comment : comments) {
-                    comments.remove(comment);
-                }
-            }
-//            while (orders.size() > 0) {
-//                for (OrderEntity order : orders) {
-//                    orders.remove(order);
-//                }
-//            }
-            this.giftRepository.deleteById(id);
-
-        } catch (Exception ex) {
-            System.out.println("Can not delete the gift with id: " + id + " because has comments!");
-            System.out.println(ex.getMessage());
+        if (gift.getComments().size() > 0) {
+            Set<CommentEntity> collection = gift.getComments().stream().filter(c -> c.getGiftEntity().getId() == id).collect(Collectors.toSet());
+            this.commentRepository.deleteAll(collection);
         }
+        deletePicturesFromCloud(gift);
+        this.giftRepository.deleteById(id);
     }
 
     private void deletePicturesFromCloud(GiftEntity gift) {
@@ -85,7 +74,7 @@ public class GiftServiceImpl implements GiftService {
 
         GiftEntity gift = this.modelMapper.map(giftServiceModel, GiftEntity.class);
 
-        gift.setUserEntity(userService.findByUsername(principal.getName()));
+        //  gift.setUserEntity(userService.findByUsername(principal.getName()));
         gift.setQuantity(1);
         gift.setCategory(categoryService.findByCategoryNameEnum(giftServiceModel.getCategory()));
 
