@@ -130,12 +130,11 @@ public class UserServiceImpl implements UserService {
             if (user.getComments().size() > 0) {
                 Set<CommentEntity> collection = user.getComments().stream().filter(c -> c.getUser().getId() == id).collect(Collectors.toSet());
                 this.commentRepository.deleteAll(collection);
-                user.getComments().clear();
-            } else {
+            }
                 this.userRepository.deleteById(id);
             }
         }
-    }
+
 
     @Override
     @Transactional
