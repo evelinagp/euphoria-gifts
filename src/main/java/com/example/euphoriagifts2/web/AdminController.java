@@ -67,6 +67,7 @@ public class AdminController {
    
 //    TODO
 //     CAN NOT DELETE GIFT WHICH IS INCLUDED IN ORDER. FIX IT TO SHOW MESSAGE!
+//     ALSO CAN NOT DELETE GIFT WHO HAS A COMMENT - FIX IT!
  //DELETE GIFT
     @Transactional
     @GetMapping("/delete-gift/{id}")
@@ -116,11 +117,11 @@ public class AdminController {
         return "manage-users";
     }
 
-    //REMOVE USER
+    
 //    @Transactional
-    //    TODO -> CAN NOT DELETE USER WHO HAVE ORDER. FIX IT TO SHOW MESSAGE!
-    //     ALSO CAN NOT DELETE USER WHO HAS A COMMENT - FIX IT!
+    //    TODO -> CAN NOT DELETE USER WHO HAS ORDER. FIX IT TO SHOW MESSAGE!
 
+//REMOVE USER
     @GetMapping("/delete-role/{id}")
     public String deleteUser(@PathVariable Long id) throws Exception {
         boolean isUserExist = this.userService.existById(id);
