@@ -64,11 +64,10 @@ public class AdminController {
         return "redirect:/gifts/all-gifts";
     }
 
-    //DELETE GIFT
+   
 //    TODO
 //     CAN NOT DELETE GIFT WHICH IS INCLUDED IN ORDER. FIX IT TO SHOW MESSAGE!
-//     ALSO CAN NOT DELETE GIFT GIFT WHICH HAS A COMMENT - FIX IT!
-
+ //DELETE GIFT
     @Transactional
     @GetMapping("/delete-gift/{id}")
     public String deleteGift(@PathVariable Long id) throws Exception {
