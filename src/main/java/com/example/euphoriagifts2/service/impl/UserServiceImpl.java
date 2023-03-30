@@ -2,10 +2,12 @@ package com.example.euphoriagifts2.service.impl;
 
 import com.example.euphoriagifts2.model.binding.UserRegisterBindingModel;
 import com.example.euphoriagifts2.model.entity.CommentEntity;
+import com.example.euphoriagifts2.model.entity.OrderEntity;
 import com.example.euphoriagifts2.model.entity.RoleEntity;
 import com.example.euphoriagifts2.model.entity.UserEntity;
 import com.example.euphoriagifts2.model.service.UserServiceModel;
 import com.example.euphoriagifts2.repository.CommentRepository;
+import com.example.euphoriagifts2.repository.OrderRepository;
 import com.example.euphoriagifts2.repository.RoleRepository;
 import com.example.euphoriagifts2.repository.UserRepository;
 import com.example.euphoriagifts2.service.AppUserDetailsService;
@@ -36,13 +38,14 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService appUserDetailsService;
     private final String adminPass;
-    private final RoleService roleService;
+   // private final RoleService roleService;
+    private final OrderRepository orderRepository;
 
     public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository,
                            RoleRepository roleRepository, CommentRepository commentRepository, PasswordEncoder passwordEncoder,
                            UserDetailsService appUserDetailsService,
                            @Value("${app.default.admin.password}") String adminPass,
-                           RoleService roleService) {
+                          /* RoleService roleService,*/ OrderRepository orderRepository) {
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
@@ -50,7 +53,8 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.appUserDetailsService = appUserDetailsService;
         this.adminPass = adminPass;
-        this.roleService = roleService;
+     //   this.roleService = roleService;
+        this.orderRepository = orderRepository;
     }
 
 
@@ -126,14 +130,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) throws Exception {
         UserEntity user = this.userRepository.findById(id).orElseThrow(Exception::new);
+        Set<OrderEntity> ordersByCustomer = this.orderRepository.findAll().stream().filter(orderEntity -> orderEntity.getCustomer().getId() == id).collect(Collectors.toSet());
+
+
         if (user.getId() != 1) {
-            if (user.getComments().size() > 0) {
-                Set<CommentEntity> collection = user.getComments().stream().filter(c -> c.getUser().getId() == id).collect(Collectors.toSet());
-                this.commentRepository.deleteAll(collection);
+            Set<CommentEntity> commentsCollection = user.getComments();
+            if (commentsCollection.size() > 0) {
+                this.commentRepository.deleteAll(commentsCollection);
             }
-                this.userRepository.deleteById(id);
+            if (ordersByCustomer.size() > 0) {
+                ordersByCustomer.forEach(orderEntity -> this.orderRepository.delete(orderEntity));
             }
+            this.userRepository.deleteById(id);
         }
+    }
 
 
     @Override
