@@ -114,11 +114,10 @@ public class AdminController {
     }
 
     
-//    @Transactional
-    //    TODO -> CAN NOT DELETE USER WHO HAS ORDER. FIX IT TO SHOW MESSAGE!
 
 //REMOVE USER
-    @GetMapping("/delete-role/{id}")
+//   @Transactional
+     @GetMapping("/delete-role/{id}")
     public String deleteUser(@PathVariable Long id) throws Exception {
         boolean isUserExist = this.userService.existById(id);
         if (isUserExist) {
