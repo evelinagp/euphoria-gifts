@@ -9,6 +9,7 @@ import com.example.euphoriagifts2.model.service.GiftServiceModel;
 import com.example.euphoriagifts2.model.view.GiftViewModel;
 import com.example.euphoriagifts2.repository.CommentRepository;
 import com.example.euphoriagifts2.repository.GiftRepository;
+import com.example.euphoriagifts2.repository.OrderRepository;
 import com.example.euphoriagifts2.service.*;
 import com.example.euphoriagifts2.service.exceptions.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,8 +35,9 @@ public class GiftServiceImpl implements GiftService {
     private final ModelMapper modelMapper;
     private final CloudinaryService cloudinaryService;
     private final CommentRepository commentRepository;
+    private final OrderRepository orderRepository;
 
-    public GiftServiceImpl(GiftRepository giftRepository, UserService userService, OrderService orderService, PictureService pictureService, ModelMapper modelMapper, CategoryService categoryService, CloudinaryService cloudinaryService, CommentRepository commentRepository) {
+    public GiftServiceImpl(GiftRepository giftRepository, UserService userService, OrderService orderService, PictureService pictureService, ModelMapper modelMapper, CategoryService categoryService, CloudinaryService cloudinaryService, CommentRepository commentRepository, OrderRepository orderRepository) {
         this.giftRepository = giftRepository;
         this.userService = userService;
         this.orderService = orderService;
@@ -46,6 +47,7 @@ public class GiftServiceImpl implements GiftService {
         this.cloudinaryService = cloudinaryService;
 
         this.commentRepository = commentRepository;
+        this.orderRepository = orderRepository;
     }
 
     @Transactional
@@ -53,9 +55,21 @@ public class GiftServiceImpl implements GiftService {
     public void deleteGiftById(Long id) {
         GiftEntity gift = this.giftRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Gift with id: " + id + " was not found!"));
 
-        if (gift.getComments().size() > 0) {
-            Set<CommentEntity> collection = gift.getComments().stream().filter(c -> c.getGiftEntity().getId() == id).collect(Collectors.toSet());
-            this.commentRepository.deleteAll(collection);
+        Set<OrderEntity> orderCollection = orderRepository.findAll().stream().filter(orderEntity -> orderEntity.getGifts().contains(gift)).collect(Collectors.toSet());
+
+        if (orderCollection.size() > 0) {
+            orderCollection.forEach(orderEntity -> {
+                if (orderEntity.getGifts().size() == 1) {
+                    this.orderRepository.delete(orderEntity);
+                } else {
+                    orderEntity.getGifts().remove(gift);
+                    orderEntity.setTotalPrice(orderEntity.getTotalPrice().subtract(gift.getPrice()));
+                }
+            });
+        }
+        Set<CommentEntity> commentsCollection = gift.getComments();
+        if (commentsCollection.size() > 0) {
+            this.commentRepository.deleteAll(commentsCollection);
         }
         deletePicturesFromCloud(gift);
         this.giftRepository.deleteById(id);
