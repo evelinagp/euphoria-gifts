@@ -63,11 +63,7 @@ public class AdminController {
 
         return "redirect:/gifts/all-gifts";
     }
-
    
-//    TODO
-//     CAN NOT DELETE GIFT WHICH IS INCLUDED IN ORDER. FIX IT TO SHOW MESSAGE!
-
  //DELETE GIFT
     @Transactional
     @GetMapping("/delete-gift/{id}")
