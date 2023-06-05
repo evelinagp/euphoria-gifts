@@ -1,1 +1,0 @@
-web: java -jar target\EuphoriaGifts2-0.0.1-SNAPSHOT.jar
